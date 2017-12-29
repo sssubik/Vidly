@@ -1,0 +1,16 @@
+﻿@model Vidly.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1><br>
+<ul>
+    @if (@Model.DOB.GetHashCode()!=0)
+    {
+    <li><h4>@Model.DOB</h4></li>
+    }
+    <li><h4>@Model.MembershipType.Name</h4></li>
+</ul>
+
+
