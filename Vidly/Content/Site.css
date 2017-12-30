@@ -22,3 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
+.top-padding {
+    padding-top:30px;
+}
+.bottom-padding {
+    margin-bottom: 30px;
+}
+.field-validation-error {
+    color:red;
+}
+.input-validation-error {
+    border:2px solid red;
+}

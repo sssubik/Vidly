@@ -66,5 +66,45 @@ namespace VidlyUdemy.Controllers
 
             return View(Movie);
         }
+        public ActionResult New() {
+            var genre = _Context.Genres.ToList();
+            var viewModel = new NewMovieViewModel()
+            {
+                Genres = genre
+            };
+            return View("NewForm",viewModel);
+        }
+        public ActionResult Save(Movies movies) {
+           
+            if (movies.Id == 0)
+            {
+                _Context.Movies.Add(movies);
+            }
+            else {
+                var moviesInDb = _Context.Movies.Single(c => c.Id ==movies.Id);
+                moviesInDb.Name = movies.Name;
+                moviesInDb.ReleasedDate = movies.ReleasedDate;
+                moviesInDb.DateAdded = movies.DateAdded;
+                moviesInDb.stock = movies.stock;
+                moviesInDb.GenreId = movies.GenreId;
+
+            }
+            _Context.SaveChanges();
+            return RedirectToAction("Index","Movies");
+           
+        }
+        public ActionResult Edit(int id) {
+            var movie = _Context.Movies.SingleOrDefault(c => c.Id == id);
+            var genres = _Context.Genres.ToList();
+
+            var viewModel = new NewMovieViewModel()
+            {
+                Movies = movie,
+                Genres = genres
+            };
+
+            return View("NewForm",viewModel);
+        }
+       
     }
 }
